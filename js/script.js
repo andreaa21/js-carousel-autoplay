@@ -1,3 +1,8 @@
+/*
+    Copiamo la repo del carousel in una nuova cartella (attenzione ad eliminare la cartella .git) e facciamo funzionare il carousel, oltre che con i bottoni anche in autoplay al caricamento della pagina.
+*/
+
+
 const images = [
     "01.jpg",
     "02.jpg",
@@ -5,23 +10,26 @@ const images = [
     "04.jpg",
     "05.jpg"
 ];
-
-let tagImg = '';
 const slider = document.querySelector('.slider');
 
-for(let i = 0; i < images.length; i++){
-    tagImg += `
-        <img class="item" src="img/${images[i]}" alt="${images[i]}">
-    `;
-}
+printImg();
+    
 
-slider.innerHTML += tagImg;
 
 let imageCounter = 0; 
 const numImages = 5;
-
 const items = document.getElementsByClassName('item');
 items[imageCounter].classList.add('active');
+
+setInterval(function(){
+    items[imageCounter].classList.remove('active');
+    imageCounter++;
+    if(imageCounter === numImages){
+        imageCounter = 0;
+    }
+    items[imageCounter].classList.add('active');
+},5000);
+
 
 const down = document.querySelector('.down');
 const up = document.querySelector('.up');
@@ -46,6 +54,15 @@ up.addEventListener('click', function(){
 });
 
 
-/*
-    Copiamo la repo del carousel in una nuova cartella (attenzione ad eliminare la cartella .git) e facciamo funzionare il carousel, oltre che con i bottoni anche in autoplay al caricamento della pagina.
-*/
+
+function printImg(){
+    let tagImg = '';
+    for(let i = 0; i < images.length; i++){
+        tagImg += `
+            <img class="item" src="img/${images[i]}" alt="${images[i]}">
+        `;
+    }
+    
+    slider.innerHTML += tagImg;
+}
+ 
